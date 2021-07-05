@@ -1,0 +1,17 @@
+# Ref: https://github.com/ros2/teleop_twist_joy
+teleop_twist_joy_node:
+  ros__parameters:
+    axis_linear:
+      x: 1 # L stick
+    scale_linear:
+      x: 1.0
+    scale_linear_turbo:
+      x: 2.0
+
+    axis_angular:
+      yaw: 3 # R stick
+    scale_angular:
+      yaw: 5.0
+
+    enable_button: 4  # L1
+    enable_turbo_button: 6 # L2

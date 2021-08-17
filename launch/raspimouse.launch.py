@@ -20,10 +20,12 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.actions import RegisterEventHandler
 from launch.actions import ExecuteProcess
+from launch.actions import DeclareLaunchArgument
 from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch.substitutions import Command
+from launch.substitutions import LaunchConfiguration
 
 
 def generate_launch_description():
@@ -43,10 +45,15 @@ def generate_launch_description():
         parameters=[params]
     )
 
+    declare_challenge_number = DeclareLaunchArgument(
+        'challenge', default_value='01',
+        description=('Set challenge number: 00 ~ 08')
+    )
+
     field = IncludeLaunchDescription(
             PythonLaunchDescriptionSource([
                 get_package_share_directory('hac_gazebo'),
-                '/launch/challenge07.launch.py']),
+                '/launch/challenge', LaunchConfiguration('challenge'), '.launch.py']),
         )
 
     spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
@@ -98,6 +105,7 @@ def generate_launch_description():
                 on_exit=[diff_drive_controller],
             )
         ),
+        declare_challenge_number,
         field,
         node_robot_state_publisher,
         spawn_entity,

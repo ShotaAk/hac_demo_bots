@@ -20,9 +20,10 @@ diff_drive_controller:
     wheels_per_side: 1
     wheel_radius : 0.024 # 0.024
     wheel_separation_multiplier : 1.0
-    left_wheel_radius_multiplier : 1.0
-    right_wheel_radius_multiplier : 1.0
+    left_wheel_radius_multiplier : 0.95
+    right_wheel_radius_multiplier : 0.95
     use_stamped_vel : false
+    base_frame_id: base_footprint
     # publish_limited_velocity : true
     # linear.x.has_velocity_limits : true
     # linear.x.max_velocity : 1.0

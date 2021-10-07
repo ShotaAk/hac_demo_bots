@@ -92,6 +92,15 @@ def generate_launch_description():
       output='screen'
     )
 
+    recognition_node = Node(
+            package='hac_demo_bots',
+            executable='hac_recognition.py',
+            name='recognition_node',
+            remappings=[('image_raw', 'camera/image_raw')],
+            output='screen'
+            # parameters=[config_file_path]
+    )
+
     return LaunchDescription([
         RegisterEventHandler(
             event_handler=OnProcessExit(
@@ -110,5 +119,6 @@ def generate_launch_description():
         node_robot_state_publisher,
         spawn_entity,
         joy_node,
-        teleop_node
+        teleop_node,
+        # recognition_node
     ])
